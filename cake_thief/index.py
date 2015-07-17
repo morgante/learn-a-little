@@ -13,23 +13,29 @@ class Bag:
         return reduce(lambda memo, cake: memo + cake[1], self.cakes, 0)
 
 def max_duffel_bag_value(cakes, capacity):
-    if len(cakes) < 1:
-        return 0
+    max_values = [0] * (capacity + 1)
+    max_value = 0
 
-    options = []
+    for analyze_capacity in xrange(capacity + 1):
+        current_max = 0
+        for weight, value in cakes:
+            if weight < 1 and value > 0:
+                return "infinity"
+            elif weight < 1 and value == 1:
+                pass
+            elif weight <= analyze_capacity:
+                additional_capacity = analyze_capacity - weight
+                potential_max = max_values[additional_capacity] + value
+                current_max = max(potential_max, current_max)
 
-    cakes.sort(key=lambda cake: cake[1] / cake[0], reverse=True)
+        max_values[analyze_capacity] = current_max
 
-    bag = Bag()
+    return max_values[capacity]
 
-    while bag.get_weight() <= capacity - cakes[0][0]:
-        bag.add(cakes[0])
 
-    another_bag = max_duffel_bag_value(cakes[1:], capacity - bag.get_weight())
 
-    return another_bag + bag.get_value()
-
-cake_tuples = [(7, 160), (3, 90), (2, 15)]
-capacity = 20
-
-print max_duffel_bag_value(cake_tuples, capacity)
+print max_duffel_bag_value([(7, 160), (3, 90), (2, 15)], 20)
+print max_duffel_bag_value([(7, 160), (3, 90), (2, 15)], 0)
+print max_duffel_bag_value([(7, 160), (3, 90), (0, 15)], 0)
+print max_duffel_bag_value([(7, 160), (3, 90), (0, 15)], 50)
+print max_duffel_bag_value([(7, 160), (3, 90), (0, 0)], 50)
