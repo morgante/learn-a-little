@@ -14,6 +14,9 @@ def merge_arrays(list1, list2):
             twochecked += 1
         merged_list.append(value1)
 
+    for value2 in list2[twochecked:]:
+        merged_list.append(value2)
+
     return merged_list
 
 
@@ -21,3 +24,7 @@ my_array = [3, 4, 6, 10, 11, 15]
 alices_array = [1, 5, 8, 12, 14, 19]
 
 print merge_arrays(my_array, alices_array)
+
+print merge_arrays([1, 2, 3], [4, 5, 6])
+
+print merge_arrays([9, 10, 13], [4, 5, 6])
