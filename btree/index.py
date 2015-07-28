@@ -19,8 +19,10 @@ class BTree(object):
         if self.root is None:
             return self
         elif value < self.root.value:
+            print "left", value, self.root.value
             return self.root.left.find(value)
         else:
+            print "right", value, self.root.value
             return self.root.right.find(value)
 
     def insert(self, value):
