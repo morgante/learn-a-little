@@ -2,23 +2,15 @@
 https://www.interviewcake.com/question/coin
 '''
 
-def count_ways(amount, denominations):
-    if amount is 0:
-        return 1
-    elif amount < 0:
-        return 0
-    elif len(denominations) is 0:
-        return 0
+def count_ways(amount, coins):
+    countages = [0] * (amount + 1)
+    countages[0] = 1
 
-    print "checking it", amount, denominations
+    for coin in coins:
+        for new_amount in range(coin, amount + 1):
+            amount_left = new_amount - coin
+            countages[new_amount] += countages[amount_left]
 
-    coin = denominations[0]
-    count = 0
-
-    while amount >= 0:
-        count += count_ways(amount, denominations[1:])
-        amount -= coin
-
-    return count
+    return countages[amount]
 
 print count_ways(4, (1, 2, 3))
