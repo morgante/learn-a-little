@@ -5,35 +5,30 @@ Making a b-tree, because why not?
 class Node(object):
     def __init__(self, value):
         self.value = value
-        self.tree = BTree(self)
         self.left = BTree()
         self.right = BTree()
 
 class BTree(object):
-    def __init__(self, root=None):
-        self.root = root
-        self.left = None
-        self.right = None
+    max_values = 2
+    def __init__(self, root=None, left=None, right=None):
+        self.values = []
+        self.children = []
 
     def find(self, value):
-        if self.root is None:
+        self.depth_print()
+        if len(self.values) < self.max_values:
             return self
-        elif value < self.root.value:
-            print "left", value, self.root.value
-            return self.root.left.find(value)
-        else:
-            print "right", value, self.root.value
-            return self.root.right.find(value)
 
     def insert(self, value):
         tree = self.find(value)
         tree.root = Node(value)
 
     def depth_print(self):
-        if (self.root is not None):
-            print self.root.value
-            self.root.left.depth_print()
-            self.root.right.depth_print()
+        pass
+        # if (self.root is not None):
+            # print self.root.value
+            # self.root.left.depth_print()
+            # self.root.right.depth_print()
 
 
 tree = BTree()
