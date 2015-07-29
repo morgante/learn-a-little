@@ -8,13 +8,18 @@ Only 3 operation types are allowed:
 '''
 
 def count_ops(a, b):
-    op_count = 0
+    if a is "":
+        return len(b)
+    elif b is "":
+        return len(a)
 
-    if len(a) < len(b):
-        op_count += abs(len(b) - len(a))
+    if a[-1] == b[-1]:
+        op = 0
+    else:
+        op = 1
 
-    print op_count
-    return op_count
+    return min(count_ops(a, b[:-1]) + 1, count_ops(a[:-1], b) + 1, count_ops(a[:-1], b[:-1]) + op)
 
-assert count_ops("a", "ab") is 1
-assert count_ops("kitten", "sitting") is 3
+print count_ops("cb", "ab"), 1
+print count_ops("a", "ab"), 1
+print count_ops("kitten", "sitting"), 3
