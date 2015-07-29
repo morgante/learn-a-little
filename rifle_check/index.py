@@ -6,14 +6,14 @@ import random
 def is_rifle_shuffled(shuffled_deck, half1, half2):
     """checks of a deck was shuffled using the random method"""
     # copy our halves, to avoid side effects
-    half1 = list(half1)
-    half2 = list(half2)
+    first_pointer = 0
+    second_pointer = 0
     for x in shuffled_deck:
-        if len(half1) > 0 and x is half1[0]:
-            half1.pop(0)
+        if first_pointer < len(half1) and half1[first_pointer] is x:
+            first_pointer += 1
             continue
-        elif len(half2) > 0 and x is half2[0]:
-            half2.pop(0)
+        elif second_pointer < len(half2) and half2[second_pointer] is x:
+            second_pointer += 1
             continue
         else:
             return False
