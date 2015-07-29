@@ -19,30 +19,32 @@ def count_ops(a, b):
     matrix = []
 
     # fill in the first row of the matrix
-    matrix.append([x for x in range(0, len(b))])
+    matrix.append([x for x in range(0, len(b) + 1)])
 
-    for row_number in xrange(1, len(a)):
+    for row_number in xrange(0, len(a)):
         row = [matrix[row_number - 1][0] + 1]
         matrix.append(row)
 
-        for col_number in xrange(1, len(b)):
+        for col_number in xrange(len(b)):
             diagnol = matrix[row_number - 1][col_number - 1]
             left = matrix[row_number][col_number - 1]
             top = matrix[row_number - 1][col_number]
             if a[row_number] is b[col_number]:
-                row.append(matrix[row_number - 1][col_number - 1])
+                val = matrix[row_number - 1][col_number - 1]
             else:
                 # find shortest path to the current value:
-                row.append(min(
+                val = min(
                     diagnol, # substitution
                     left, # insertion
                     top # deletion
-                ) + 1)
+                ) + 1
+            print "compare", a[row_number], b[col_number], val
+            row.append(val)
 
     print_matrix(matrix)
 
     return matrix[len(a) - 1][len(b) - 1]
 
-# print count_ops("cb", "ab"), 1
-# print count_ops("a", "ab"), 1
+print count_ops("cb", "ab"), 1
+print count_ops("a", "ab"), 1
 print count_ops("kitten", "sitting"), 3
