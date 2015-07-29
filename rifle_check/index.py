@@ -6,6 +6,20 @@ import random
 def is_rifle_shuffled(shuffled_deck, half1, half2):
     return True
 
+def random_split(deck):
+    """splits a deck into two random halfs"""
+    # split deck into two halves
+    length = len(deck)
+    half1 = deck[:length/2]
+    half2 = deck[length/2:]
+
+    # shuffle each half randomly
+    random.shuffle(half1)
+    random.shuffle(half2)
+
+    return (deck, half1, half2)
+
+
 def random_pop(stack):
     """pops a random number of elements off the front of a list"""
     number = random.randint(0, len(stack))
@@ -18,14 +32,7 @@ def random_pop(stack):
 
 def rifle_shuffle(deck):
     """rifle shuffles a deck, returning the halfs and the deck"""
-    # split deck into two halves
-    length = len(deck)
-    half1 = deck[:length/2]
-    half2 = deck[length/2:]
-
-    # shuffle each half randomly
-    random.shuffle(half1)
-    random.shuffle(half2)
+    deck, half1, half2 = random_split(deck)
 
     # start building our results
     shuffled_deck = []
@@ -39,5 +46,16 @@ def rifle_shuffle(deck):
 
     return response
 
+def random_shuffle(deck):
+    """randomly shuffles a deck"""
+    deck, half1, half2 = random_split(deck)
+
+    random.shuffle(deck)
+
+    return (deck, half1, half2)
+
 deck = rifle_shuffle(range(1, 53))
+print is_rifle_shuffled(deck[0], deck[1], deck[2])
+
+deck2 = random_shuffle(range(1, 53))
 print is_rifle_shuffled(deck[0], deck[1], deck[2])
