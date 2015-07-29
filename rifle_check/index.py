@@ -58,4 +58,4 @@ deck = rifle_shuffle(range(1, 53))
 print is_rifle_shuffled(deck[0], deck[1], deck[2])
 
 deck2 = random_shuffle(range(1, 53))
-print is_rifle_shuffled(deck[0], deck[1], deck[2])
+print is_rifle_shuffled(deck2[0], deck2[1], deck2[2])
