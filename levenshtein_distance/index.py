@@ -7,7 +7,14 @@ Only 3 operation types are allowed:
 * Add character
 '''
 
+def print_matrix(matrix):
+    for row in matrix:
+        print row
+
 def count_ops(a, b):
+    if len(a) < len(b):
+        return count_ops(b, a)
+
     # create a matrix for our distances
     matrix = []
 
@@ -19,14 +26,22 @@ def count_ops(a, b):
         matrix.append(row)
 
         for col_number in xrange(1, len(b)):
+            diagnol = matrix[row_number - 1][col_number - 1]
+            left = matrix[row_number][col_number - 1]
             top = matrix[row_number - 1][col_number]
-            left = row[col_number - 1]
+            if a[row_number] is b[col_number]:
+                row.append(matrix[row_number - 1][col_number - 1])
+            else:
+                # find shortest path to the current value:
+                row.append(min(
+                    diagnol, # substitution
+                    left, # insertion
+                    top # deletion
+                ) + 1)
 
-            row.append(min(top, left) + 1)
+    print_matrix(matrix)
 
-    print matrix
-
-    return 1
+    return matrix[len(a) - 1][len(b) - 1]
 
 # print count_ops("cb", "ab"), 1
 # print count_ops("a", "ab"), 1
