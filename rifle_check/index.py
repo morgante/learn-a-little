@@ -4,6 +4,20 @@ https://www.interviewcake.com/question/single-rifle-check
 import random
 
 def is_rifle_shuffled(shuffled_deck, half1, half2):
+    """checks of a deck was shuffled using the random method"""
+    # copy our halves, to avoid side effects
+    half1 = list(half1)
+    half2 = list(half2)
+    for x in shuffled_deck:
+        if len(half1) > 0 and x is half1[0]:
+            half1.pop(0)
+            continue
+        elif len(half2) > 0 and x is half2[0]:
+            half2.pop(0)
+            continue
+        else:
+            return False
+
     return True
 
 def random_split(deck):
