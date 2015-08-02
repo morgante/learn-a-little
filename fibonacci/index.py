@@ -15,5 +15,18 @@ def n_fib(n):
 
     return last_two[1]
 
-for n in range(0, 10):
-    print n, n_fib(n)
+def fast_fib(n):
+    if n <= 1:
+        return n
+    if n % 2 is 1:
+        half = (n + 1) / 2
+        return fast_fib(half)**2 + fast_fib(half - 1)**2
+    else:
+        half = n / 2
+        half_fib = fast_fib(half)
+        half_fib_minus_one = fast_fib(half - 1)
+        return ((2 * half_fib_minus_one) + half_fib) * half_fib
+
+for n in range(0, 100):
+    print n, n_fib(n), fast_fib(n)
+    assert n_fib(n) == fast_fib(n)
