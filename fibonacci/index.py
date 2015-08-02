@@ -17,4 +17,5 @@ def n_fib(n):
 
     return last_two[1]
 
-print n_fib(5)
+for n in range(0, 10):
+    print n_fib(n)
