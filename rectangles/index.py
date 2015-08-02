@@ -1,33 +1,41 @@
 '''
 https://www.interviewcake.com/question/rectangular-love
 '''
-from random import shuffle
+from random import shuffle, sample
 
 class Rectangle(object):
-    def __init__(self, hash):
-        self.hash = hash
-        self.bottom_left = (self.hash["x"], self.hash["y"])
-        self.bottom_right = (self.hash["x"] + self.hash["width"], self.hash["y"])
-        self.top_left = (self.hash["x"], self.hash["y"] + self.hash["height"])
-        self.top_right = (self.hash["x"] + self.hash["width"], self.hash["y"] + self.hash["height"])
+    def __init__(self, dictionary=None, left=None, right=None, top=None, bottom=None):
+        if (dictionary is not None):
+            self.dictionary = dictionary
+        else:
+            self.dictionary = {
+                "x": left,
+                "y": bottom,
+                "height": top - bottom,
+                "width": right - left
+            }
+        self.bottom_left = (self.dictionary["x"], self.dictionary["y"])
+        self.bottom_right = (self.dictionary["x"] + self.dictionary["width"], self.dictionary["y"])
+        self.top_left = (self.dictionary["x"], self.dictionary["y"] + self.dictionary["height"])
+        self.top_right = (self.dictionary["x"] + self.dictionary["width"], self.dictionary["y"] + self.dictionary["height"])
 
 def find_intersection(rectangles):
-    rectangles = map(lambda rectangle: Rectangle(rectangle), rectangles)
+    rectangles = map(lambda rectangle: Rectangle(dictionary=rectangle), rectangles)
 
-    if rectangles[0].bottom_left[0] <= rectangles[1].bottom_left[0]:
-        left_edge = rectangles[1].bottom_left[0]
-        right_edge = rectangles[0].bottom_right[0]
+    left_edge = max(rectangles[0].bottom_left[0], rectangles[1].bottom_left[0])
+    right_edge = min(rectangles[0].bottom_right[0], rectangles[1].bottom_right[0])
+    bottom_edge = max(rectangles[0].bottom_left[1], rectangles[1].bottom_left[1])
+    top_edge = min(rectangles[0].top_left[1], rectangles[1].top_left[1])
+
+    if left_edge > right_edge or bottom_edge > top_edge:
+        return None
     else:
-        left_edge = rectangles[0].bottom_left[0]
-        right_edge = rectangles[1].bottom_right[0]
+        overlap = Rectangle(left=left_edge, bottom=bottom_edge, top=top_edge, right=right_edge)
+        return overlap.dictionary
 
-    print left_edge, right_edge
 
-rectangles = [
-    {'x': 0, 'y': 0, 'width': 100, 'height': 40},
-    {'x': 80, 'y': 30, 'width': 30, 'height': 50}
-]
-
-shuffle(rectangles)
-
-print find_intersection(rectangles)
+print find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 40},{'x': 80, 'y': 30, 'width': 30, 'height': 50}))
+print find_intersection(({'x': 0, 'y': 5, 'width': 10, 'height': 10},{'x': 80, 'y': 30, 'width': 30, 'height': 50}))
+print find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 10, 'height': 10}))
+print find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 10, 'height': 200}))
+print find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 200, 'height': 10}))
