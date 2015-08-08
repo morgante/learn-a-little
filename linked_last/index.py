@@ -7,8 +7,26 @@ class Node(object):
         self.value = value
         self.next = None
 
+class ListLength(Exception):
+    pass
+
 def get_kth_to_last_node(k, head):
-    return "Devil's Food"
+    processed = 0
+    next = head
+    last_k = head
+
+    while (next.next is not None):
+        next = next.next
+
+        if (processed >= k - 1):
+            last_k = last_k.next
+
+        processed += 1
+
+    if (processed < k - 1):
+        raise IndexError("k must be less than the list length")
+
+    return last_k
 
 a = Node("Angel Food")
 b = Node("Bundt")
@@ -21,4 +39,10 @@ b.next = c
 c.next = d
 d.next = e
 
-print get_kth_to_last_node(2, a), "Devil's Food"
+print get_kth_to_last_node(2, a).value, "Devil's Food"
+
+print get_kth_to_last_node(0, a).value
+
+print get_kth_to_last_node(5, a).value
+
+print get_kth_to_last_node(6, a).value
