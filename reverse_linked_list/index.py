@@ -20,16 +20,15 @@ def reverse_linked_list(head):
     node = head
     previous_node = None
 
-    while True:
+    while node != None:
         next_node = node.next
 
         node.next = previous_node
         previous_node = node
 
-        if next_node is None:
-            return node
-        else:
-            node = next_node
+        node = next_node
+
+    return previous_node
 
 a = Node("Angel Food")
 b = Node("Bundt")
@@ -48,3 +47,6 @@ print_list(a)
 print("Reversed:")
 reversed_list = reverse_linked_list(a)
 print_list(reversed_list)
+
+print("Null:")
+print(reverse_linked_list(None))
