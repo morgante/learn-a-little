@@ -22,21 +22,25 @@ class BinaryTreeNode:
             if (self.left):
                 return self.left.insert_value(value)
             else:
-                return self.left = self.insert_left(value)
+                self.left = self.insert_left(value)
+                return self.left
         else:
             if (self.right):
                 return self.right.insert_value(value)
             else:
-                return self.right = self.insert_right(value)
+                self.right = self.insert_right(value)
+                return self.right
 
     def print_tree(self):
         if self.left:
             self.left.print_tree()
+        print(self.value)
         if self.right:
             self.right.print_tree()
-        print(self.value)
 
 def build_tree(depth, min_value, max_value):
+    if max_value <= min_value:
+        return None
     value = random.randint(min_value, max_value)
     node = BinaryTreeNode(value)
     if depth > 0:
@@ -44,5 +48,5 @@ def build_tree(depth, min_value, max_value):
         node.right = build_tree(depth - 1, value + 1, max_value)
     return node
 
-tree = build_tree(5, 3, 100)
+tree = build_tree(5, 3, 1000)
 tree.print_tree()
