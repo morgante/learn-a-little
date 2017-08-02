@@ -18,12 +18,10 @@ def reverse_words(string):
     reverse_chars(chars, 0, len(chars))
 
     word_start = 0
-    for i, char in enumerate(chars):
-        if char == ' ':
+    for i in range(0, len(chars) + 1):
+        if i == len(chars) or chars[i] == ' ':
             reverse_chars(chars, word_start, i)
             word_start = i + 1
-
-    reverse_chars(chars, word_start, len(chars))
 
     return ''.join(chars)
 
