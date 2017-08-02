@@ -8,13 +8,9 @@ def get_prime_sum(n):
     while len(numbers) > 0:
         p = numbers.pop()
         prime_sum += p
-        q = p
-        while q <= n:
-            q = q + p
-            try:
-                numbers.remove(q)
-            except KeyError:
-                pass
+        c = set()
+        print('discard', p, set.update(range(2 * p, n + 1, p)))
+        numbers.discard(set(range(p, n + 1, p)))
     
     return prime_sum
 
