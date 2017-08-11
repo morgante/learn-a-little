@@ -13,4 +13,4 @@ def count_ways(amount, coins):
 
     return countages[amount]
 
-print count_ways(4, (1, 2, 3))
+print(count_ways(4, (3, 2, 1)))
