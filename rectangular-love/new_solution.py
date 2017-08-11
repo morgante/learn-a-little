@@ -39,3 +39,8 @@ print(find_intersection(({'x': 0, 'y': 5, 'width': 10, 'height': 10},{'x': 80, '
 print(find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 10, 'height': 10})))
 print(find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 10, 'height': 200})))
 print(find_intersection(({'x': 0, 'y': 0, 'width': 100, 'height': 100},{'x': 10, 'y': 10, 'width': 200, 'height': 10})))
+
+
+print(find_intersection((
+    {'x': 0, 'y': 0, 'width': 100, 'height': 100},
+    {'x': 100, 'y': 10, 'width': 10, 'height': 10})))
