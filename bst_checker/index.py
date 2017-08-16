@@ -11,6 +11,9 @@ python3 -m bst_checker.index
 from common.bst import BinaryTreeNode, build_tree
 
 def is_valid_bst(node, max_value=float('inf'), min_value=-float('inf')):
+    if not node:
+        return True
+
     if node.value >= max_value:
         # print('too big', node.value, max_value)
         return False
@@ -18,15 +21,8 @@ def is_valid_bst(node, max_value=float('inf'), min_value=-float('inf')):
         # print('too small', node.value, min_value)
         return False
     
-    if node.left:
-        left_valid = is_valid_bst(node.left, max_value=node.value, min_value=min_value)
-    else:
-        left_valid = True
-    
-    if node.right:
-        right_valid = is_valid_bst(node.right, min_value=node.value, max_value=max_value)
-    else:
-        right_valid = True
+    left_valid = is_valid_bst(node.left, max_value=node.value, min_value=min_value)
+    right_valid = is_valid_bst(node.right, min_value=node.value, max_value=max_value)
 
     return left_valid and right_valid
 
