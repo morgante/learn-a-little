@@ -34,6 +34,7 @@ class BinaryTreeNode:
                 value=self.value,
                 depth=depth
             ))
+            return
         if self.left:
             self.left.print_tree(depth + 1)
         print(self.value)
