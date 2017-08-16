@@ -3,22 +3,15 @@ https://www.interviewcake.com/question/python/inflight-entertainment
 '''
 
 def find_combo_flight(flight_length, movie_lengths):
-    lengths = {}
+    seen_lengths = set()
 
     for length in movie_lengths:
-        if length not in lengths:
-            lengths[length] = 0
-        lengths[length] += 1
-
-    for length in lengths:
         looking_for = flight_length - length
-        if looking_for == length:
-            if lengths[length] >= 2:
-                return (length, length)
-            else:
-                return None
-        if looking_for in lengths:
+
+        if looking_for in seen_lengths:
             return (length, looking_for)
+
+        seen_lengths.add(length)
 
     return None
 
