@@ -31,8 +31,8 @@ def find_shortest_path(network, origin, destination, visited=None):
 
 network = {
     'Min'     : ['William', 'Jayden', 'Omar'],
-    'William' : ['Min', 'Noam'],
-    'Jayden'  : ['Min', 'Amelia', 'Ren', 'Noam'],
+    'William' : ['Min'],
+    'Jayden'  : ['Min', 'Amelia', 'Ren'],
     'Ren'     : ['Jayden', 'Omar'],
     'Amelia'  : ['Jayden', 'Adam', 'Miguel'],
     'Adam'    : ['Amelia', 'Miguel', 'Sofia', 'Lucas'],
@@ -40,4 +40,5 @@ network = {
 }
 
 # print(find_shortest_path(network, 'Jayden', 'Adam'))
-print(find_shortest_path(network, 'Miguel', 'Omar'))
+print(find_shortest_path(network, 'Miguel', 'Ren'))
+print(find_shortest_path(network, 'Miguel', 'Noam'))
